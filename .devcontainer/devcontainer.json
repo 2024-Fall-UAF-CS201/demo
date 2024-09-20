@@ -1,6 +1,6 @@
 {
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
-  "postCreateCommand": "sudo apt-get update && sudo apt install -y g++-14 && sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 10",
+  "postCreateCommand": "sudo apt-get update && sudo apt install -y g++-14 && sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/x86_64-linux-gnu-g++-14 10",
   "features": {
   }
 }
