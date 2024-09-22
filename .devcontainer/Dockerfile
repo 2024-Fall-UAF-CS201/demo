@@ -7,7 +7,7 @@ ARG USER_GID=$USER_UID
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get install -y  --no-install-recommends less emacs man-db
+    && apt-get -y install --no-install-recommends less emacs man-db
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
