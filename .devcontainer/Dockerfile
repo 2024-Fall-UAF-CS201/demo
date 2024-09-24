@@ -1,9 +1,8 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
-#FROM debian:bookworm-slim AS intermediate
+#FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
+FROM debian:bookworm-slim AS intermediate
 
 # Install LLVM
-#RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list && \
-#    wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
     
 # Install dependencies
 #RUN apt-get -qq update && \
@@ -48,4 +47,4 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-#FROM intermediate as final
+FROM intermediate as final
