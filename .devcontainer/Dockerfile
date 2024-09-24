@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm AS intermediate
+FROM mcr.microsoft.com/devcontainers/universal:focal AS intermediate
+#FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm AS intermediate
 #FROM debian:bookworm-slim AS intermediate
 #FROM gcc:latest AS intermediate
 
@@ -21,7 +22,7 @@ RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.
 #RUN deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
 
 #RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-jammy-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-focal-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
 
 
 RUN for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done
