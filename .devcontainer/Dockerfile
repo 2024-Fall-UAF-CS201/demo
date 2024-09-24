@@ -2,7 +2,7 @@
 FROM debian:bookworm-slim AS intermediate
 
 # Install LLVM
-RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+RUN curl -o /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
     
 # Install dependencies
 #RUN apt-get -qq update && \
