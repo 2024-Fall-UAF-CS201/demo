@@ -19,8 +19,6 @@ RUN apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 cl
 
 RUN for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done
 
-RUN ln -sf clang++18 /usr/bin/c++ && ln -sf clang++18 /usr/bin/g++
-
 RUN rm -rf /var/lib/apt/lists/*
 
 # Install LLVM
@@ -61,3 +59,7 @@ USER $USERNAME
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 FROM intermediate as final
+
+RUN ln -sf clang++18 /usr/bin/c++ && ln -sf clang++18 /usr/bin/g++
+
+RUN echo "alias clang++='clang++ -stdlib=libc++ -std=c++23'" > /etc/profile.d/clangAlias.sh && chmod a+rx /etc/profile.d/clangAlias.sh
