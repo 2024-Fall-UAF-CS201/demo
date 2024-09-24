@@ -1,8 +1,9 @@
-FROM debian:bookworm-slim AS intermediate
+FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
+#FROM debian:bookworm-slim AS intermediate
 
 # Install LLVM
-RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list && \
-    wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+#RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list && \
+#    wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
     
 # Install dependencies
 #RUN apt-get -qq update && \
@@ -26,25 +27,25 @@ RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /
 
 
 
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+#ARG USERNAME=vscode
+#ARG USER_UID=1000
+#ARG USER_GID=$USER_UID
 
 # Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends less man-db
+#RUN groupadd --gid $USER_GID $USERNAME \
+#    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+#    && apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#    && apt-get -y install --no-install-recommends less man-db
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
+#USER $USERNAME
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-FROM intermediate as final
+#FROM intermediate as final
