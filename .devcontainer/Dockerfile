@@ -60,7 +60,7 @@ USER $USERNAME
 
 # RUN ln -sf clang++ /usr/bin/c++ && ln -sf clang++ /usr/bin/g++
 
-RUN echo "alias clang++='clang++ -stdlib=libc++ -std=c++23'" > /etc/profile.d/clangAlias.sh && chmod a+rx /etc/profile.d/clangAlias.sh
+# RUN echo "alias clang++='clang++ -stdlib=libc++ -std=c++23'" > /etc/profile.d/clangAlias.sh && chmod a+rx /etc/profile.d/clangAlias.sh
 
 FROM intermediate as final
 
