@@ -1,9 +1,10 @@
 #FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
-FROM debian:bookworm-slim AS intermediate
+#FROM debian:bookworm-slim AS intermediate
+FROM gcc:latest
 
 # Install dependencies
-RUN apt-get -qq update && \
-    apt-get install -qqy --no-install-recommends gnupg2 wget ca-certificates apt-transport-https file make git
+#RUN apt-get -qq update && \
+#    apt-get install -qqy --no-install-recommends gnupg2 wget ca-certificates apt-transport-https file make git
 #        gnupg2 wget ca-certificates apt-transport-https \
 #        autoconf automake cmake dpkg-dev file make patch libc6-dev
 
