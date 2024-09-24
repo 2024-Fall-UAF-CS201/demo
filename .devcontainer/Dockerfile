@@ -1,6 +1,6 @@
 #FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
 #FROM debian:bookworm-slim AS intermediate
-FROM gcc:latest
+FROM gcc:latest AS intermediate
 
 # Install dependencies
 #RUN apt-get -qq update && \
