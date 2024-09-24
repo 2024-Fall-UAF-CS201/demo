@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim AS intermediate
 
 # Install dependencies
 RUN apt-get -qq update && \
@@ -7,7 +7,7 @@ RUN apt-get -qq update && \
         autoconf automake cmake dpkg-dev file make patch libc6-dev
 
 # Install LLVM
-#RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-18 main" > /etc/apt/sources.list.d/llvm.list && \
+RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-18 main" > /etc/apt/sources.list.d/llvm.list
     #wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
     #apt-get -qq update && \
     # apt-get install -qqy -t llvm-toolchain-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev && \
@@ -39,3 +39,5 @@ USER $USERNAME
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+FROM intermediate as final
