@@ -17,6 +17,8 @@ RUN apt-get -qq update
 
 RUN apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
 
+RUN apt-get install -qqy -t make git
+
 RUN for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done
 
 RUN rm -rf /var/lib/apt/lists/*
