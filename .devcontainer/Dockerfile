@@ -7,12 +7,12 @@ RUN apt-get -qq update; \
         autoconf automake cmake dpkg-dev file make patch libc6-dev
 
 # Install LLVM
-RUN echo "deb {repo_url} {repo_distribution} {repo_component}" \
+RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-18 main" \
         > /etc/apt/sources.list.d/llvm.list && \
     wget -qO /etc/apt/trusted.gpg.d/llvm.asc \
         https://apt.llvm.org/llvm-snapshot.gpg.key && \
     apt-get -qq update && \
-    apt-get install -qqy -t {repo_distribution} {packages} && \
+    apt-get install -qqy -t llvm-toolchain-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev && \
     for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done && \
     ln -sf clang /usr/bin/cc && \
     ln -sf clang /usr/bin/c89 && \
