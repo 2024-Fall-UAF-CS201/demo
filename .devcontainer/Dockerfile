@@ -58,8 +58,9 @@ USER $USERNAME
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-FROM intermediate as final
-
-RUN ln -sf clang++18 /usr/bin/c++ && ln -sf clang++18 /usr/bin/g++
+# RUN ln -sf clang++ /usr/bin/c++ && ln -sf clang++ /usr/bin/g++
 
 RUN echo "alias clang++='clang++ -stdlib=libc++ -std=c++23'" > /etc/profile.d/clangAlias.sh && chmod a+rx /etc/profile.d/clangAlias.sh
+
+FROM intermediate as final
+
