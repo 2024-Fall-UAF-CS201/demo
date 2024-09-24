@@ -3,23 +3,25 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm AS intermediate
 #FROM gcc:latest AS intermediate
 
 # Install dependencies
-#RUN apt-get -qq update && \
-#    apt-get install -qqy --no-install-recommends gnupg2 wget ca-certificates apt-transport-https file make git
+RUN apt-get -qq update \
+    apt-get install -qqy --no-install-recommends gnupg2 wget ca-certificates apt-transport-https file make git
 #        gnupg2 wget ca-certificates apt-transport-https \
 #        autoconf automake cmake dpkg-dev file make patch libc6-dev
 
      
 # Install LLVM
 #RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list
+RUN echo "deb https://apt.llvm.org/focal llvm-toolchain-focal-18 main" > /etc/apt/sources.list.d/llvm.list
 
-#RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+
+RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
 
 #RUN apt-get -qq update
-RUN deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
-RUN deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
+#RUN deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
+#RUN deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
 
 #RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-jammy-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
 
 
 RUN for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done
