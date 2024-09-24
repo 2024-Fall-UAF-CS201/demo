@@ -1,4 +1,4 @@
-FROM gcc:latest
+FROM stagex/llvm:latest
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
