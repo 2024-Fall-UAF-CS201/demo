@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm
+FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm AS intermediate
 #FROM debian:bookworm-slim AS intermediate
 #FROM gcc:latest AS intermediate
 
