@@ -1,15 +1,17 @@
 #FROM mcr.microsoft.com/vscode/devcontainers/base:alpine3.20
 FROM debian:bookworm-slim AS intermediate
 
-# Install LLVM
-RUN curl -o /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
-    
 # Install dependencies
-#RUN apt-get -qq update && \
-#    apt-get install -qqy --no-install-recommends \
-#        gnupg2 wget ca-certificates apt-transport-https \
-#        autoconf automake cmake dpkg-dev file make patch libc6-dev
-        
+RUN apt-get -qq update && \
+    apt-get install -qqy --no-install-recommends \
+        gnupg2 wget ca-certificates apt-transport-https \
+        autoconf automake cmake dpkg-dev file make patch libc6-dev
+
+     
+# Install LLVM
+RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+    
+   
 # Install LLVM
 #RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list && \
 #    wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key && \
