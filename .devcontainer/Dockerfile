@@ -10,13 +10,17 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:dev-bookworm AS intermediate
 
      
 # Install LLVM
-RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list
+#RUN echo "deb https://apt.llvm.org/bookworm llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.list
 
-RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
+#RUN wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key
 
-RUN apt-get -qq update
+#RUN apt-get -qq update
+RUN deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
+RUN deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
 
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
+#RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t llvm-toolchain-bookworm-18 clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -qqy -t clang-18 clang-tidy-18 clang-format-18 lld-18 libc++-18-dev libc++abi-18-dev
+
 
 RUN for f in /usr/lib/llvm-*/bin/*; do ln -sf "$f" /usr/bin; done
 
@@ -38,22 +42,22 @@ RUN rm -rf /var/lib/apt/lists/*
 
 
 
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+#ARG USERNAME=vscode
+#ARG USER_UID=1000
+#ARG USER_GID=$USER_UID
 
 # Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends less man-db
+#RUN groupadd --gid $USER_GID $USERNAME \
+#    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+#    && apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#    && apt-get -y install --no-install-recommends less man-db
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
+#USER $USERNAME
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
